@@ -6,8 +6,6 @@ const DBconnection = async () => {
 
     try {
         await mongoose.connect(DBurl, {
-            useCreateIndex: true,
-            useFindAndModify: false,
             useUnifiedTopology: true,
             useNewUrlParser: true
         });
@@ -16,3 +14,4 @@ const DBconnection = async () => {
     }
 
 }
+export default DBconnection;
