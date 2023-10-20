@@ -1,11 +1,18 @@
 import express from "express";
 import DBconnection from "./config/DBconnection.js";
-import signUpUser from "./controllers/users/userCtrl.js";
+import usersRoute from "./routes/users/UsersRoute.js";
 
 const app = express();
+
+const logger = (req, res, next) => {
+    console.log(`${req.method} ${req.path}`);
+    next();
+};
+
+app.use(logger);
+
 DBconnection();
 
-app.post("/signup", (req, res) => {
-    res.json({ user: "admin" });
-  });
+app.use('/api/users', usersRoute);
+
 export default app;
