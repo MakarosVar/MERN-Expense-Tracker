@@ -1,18 +1,24 @@
-import express from "express";
-import DBconnection from "./config/DBconnection.js";
-import usersRoute from "./routes/users/UsersRoute.js";
+import express from 'express';
+import DBconnection from './config/DBconnection.js';
+import usersRoute from './routes/users/UsersRoute.js';
+import {
+  errorHandler,
+  notFound,
+} from './middleware/errorMiddleware.js';
 
 const app = express();
 
-const logger = (req, res, next) => {
-    console.log(`${req.method} ${req.path}`);
-    next();
-};
-
-app.use(logger);
-
+//connect to DB
 DBconnection();
 
-app.use('/api/users', usersRoute);
+//middlewares
+app.use(express.json());
+
+//routes
+app.use('/', usersRoute);
+
+//Error handler
+app.use(errorHandler);
+app.use(notFound);
 
 export default app;
