@@ -24,4 +24,16 @@ const signUpUser = expressAsyncHandler(async (req, res, next) => {
   }
 });
 
-export default signUpUser;
+//fetch all users
+const fetchAllUsersCtrl = expressAsyncHandler(
+  async (req, res, next) => {
+    try {
+      const users = await User.find({});
+      res.status(200).json(users);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
+export { signUpUser, fetchAllUsersCtrl };

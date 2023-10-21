@@ -15,7 +15,7 @@ DBconnection();
 app.use(express.json());
 
 //routes
-app.use('/', usersRoute);
+app.use('/api/users', usersRoute);
 
 //Error handler
 app.use(errorHandler);
