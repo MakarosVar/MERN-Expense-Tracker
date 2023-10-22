@@ -1,11 +1,10 @@
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
 
-const DBurl =
-  'mongodb+srv://makisV:ZCCWaOjBkQobnlCO@expense-tracker.q94ddrr.mongodb.net/ExpenseTracker?retryWrites=true&w=majority';
-
+dotenv.config();
 const DBconnection = async () => {
   try {
-    await mongoose.connect(DBurl, {
+    await mongoose.connect( process.env.MONGO_URI, {
       useUnifiedTopology: true,
       useNewUrlParser: true,
       autoIndex: true,
