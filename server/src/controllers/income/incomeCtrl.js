@@ -20,5 +20,17 @@ const createIncomeCtrl = expressAsyncHandler(async (req, res, next) => {
     }
 
 });
-export default createIncomeCtrl;
+
+//fetch all incomes 
+
+const fetchAllIncomesCtrl = expressAsyncHandler(async (req, res, next) => {
+    try {
+        const incomes = await Income.find({});
+        res.status(200).json(incomes);
+    } catch (error) {
+        next(error);
+    }
+});
+
+export {createIncomeCtrl, fetchAllIncomesCtrl};
 
