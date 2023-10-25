@@ -5,7 +5,7 @@ import {
   fetchOneExpenseCtrl,
   updateExpenseCtrl,
   deleteExpenseCtrl,
-} from '../../controllers/expense/expenseCtrl.js';
+} from '../../controllers/expenses/expenseCtrl.js';
 
 const expenseRoute = Express.Router();
 expenseRoute.post('/', createExpenseCtrl);

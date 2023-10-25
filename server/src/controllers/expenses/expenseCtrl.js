@@ -1,5 +1,5 @@
 import expressAsyncHandler from 'express-async-handler';
-import Expense from '../../models/expense';
+import Expense from '../../models/Expense.js';
 
 //create new income
 
