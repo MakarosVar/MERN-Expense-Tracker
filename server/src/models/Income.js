@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import mongoosePaginate from "mongoose-paginate-v2";
 
 const incomeSchema = new mongoose.Schema({
   title: {
@@ -27,5 +28,9 @@ const incomeSchema = new mongoose.Schema({
     default: Date.now(),
   },
 });
+
+//add pagination plugin
+incomeSchema.plugin(mongoosePaginate);
+
 const Income = mongoose.model("Income", incomeSchema);
 export default Income;
