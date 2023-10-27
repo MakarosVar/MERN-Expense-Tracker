@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import mongoosePaginate from "mongoose-paginate-v2";
 
 const expenseSchema = new mongoose.Schema({
   title: {
@@ -27,6 +28,10 @@ const expenseSchema = new mongoose.Schema({
     default: Date.now(),
   },
 });
+
+//add pagination plugin
+expenseSchema.plugin(mongoosePaginate);
+
 
 const Expense = mongoose.model('Expense', expenseSchema);
 export default Expense;
