@@ -6,12 +6,13 @@ import {
   updateExpenseCtrl,
   deleteExpenseCtrl,
 } from '../../controllers/expenses/expenseCtrl.js';
+import authMiddleware from '../../middleware/authMiddleware.js';
 
 const expenseRoute = Express.Router();
-expenseRoute.post('/', createExpenseCtrl);
-expenseRoute.get('/', fetchAllExpensesCtrl);
-expenseRoute.get('/:id', fetchOneExpenseCtrl);
-expenseRoute.put('/:id', updateExpenseCtrl);
-expenseRoute.delete('/:id', deleteExpenseCtrl);
+expenseRoute.post('/', authMiddleware, createExpenseCtrl);
+expenseRoute.get('/', authMiddleware, fetchAllExpensesCtrl);
+expenseRoute.get('/:id', authMiddleware, fetchOneExpenseCtrl);
+expenseRoute.put('/:id', authMiddleware, updateExpenseCtrl);
+expenseRoute.delete('/:id', authMiddleware, deleteExpenseCtrl);
 
 export default expenseRoute;
