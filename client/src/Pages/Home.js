@@ -31,7 +31,6 @@ const Home = () => {
                       Track your performance
                     </Link>
                     <a
-                      target="_blank"
                       className="btn btn-secondary mb-2 mb-sm-0"
                       href="https://www.youtube.com/channel/UCvu6J9q1AM6q4xysGqAvVyw"
                     >
