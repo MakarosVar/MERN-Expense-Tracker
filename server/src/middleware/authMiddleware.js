@@ -10,12 +10,18 @@ const authMiddleware = expressAsyncHandler(async (req, res, next) => {
     try {
       if (token) {
         const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+        console.log(decodedToken);
+        req.user = await User.findById(decodedToken.id);
+        console.log(req.user);
+        next();
       }
     } catch {
       res.status(401);
       throw new Error("Not authorized, token failed");      
     }
   } else {
+    res.status(401);
+    throw new Error("Not authorized, no token");    
   }
 });
 export default authMiddleware;

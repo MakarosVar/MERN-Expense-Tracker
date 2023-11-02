@@ -1,6 +1,17 @@
 import React from "react";
+import { useFormik } from "formik";
 
 const Login = () => {
+  //formik form
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    onSubmit: (values) => {
+      console.log(values);
+    },
+  });
   return (
     <section
       style={{ height: "100vh" }}
@@ -22,13 +33,19 @@ const Login = () => {
             <div className="p-5 bg-light rounded text-center">
               <span className="text-muted">Sign In</span>
               <h3 className="fw-bold mb-5">Login to your account</h3>
-              <form>
+              <form onSubmit={formik.handleSubmit}>
                 <input
+                  value={formik.values.email}
+                  onChange={formik.handleChange("email")}
+                  onBlur={formik.handleBlur("email")}
                   className="form-control mb-2"
                   type="email"
                   placeholder="Email-address"
                 />
                 <input
+                  value={formik.values.password}
+                  onChange={formik.handleChange("password")}
+                  onBlur={formik.handleBlur("password")}
                   className="form-control mb-2"
                   type="password"
                   placeholder="Password"
@@ -36,7 +53,8 @@ const Login = () => {
                 <div>
                   <button
                     type="submit"
-                    className="btn btn-primary py-2 w-100 mb-4">
+                    className="btn btn-primary py-2 w-100 mb-4"
+                  >
                     Login
                   </button>
                 </div>
