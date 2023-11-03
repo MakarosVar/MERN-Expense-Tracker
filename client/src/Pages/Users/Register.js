@@ -1,6 +1,36 @@
 import React from "react";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
 const Register = () => {
+  //Yup validation
+  const formSchema = Yup.object({
+    firstName: Yup.string()
+      .required("First Name is required")
+      .max(15, "First Name must be less than 15 characters"),
+    lastName: Yup.string()
+      .required("Last Name is required")
+      .max(15, "Last Name must be less than 15 characters"),
+    email: Yup.string()
+      .email("Invalid email format")
+      .required("Email is required"),
+    password: Yup.string()
+      .required("Password is required")
+      .length(8, "Password must be 8 characters"),
+  });
+  //formik form
+  const formik = useFormik({
+    initialValues: {
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+    },
+    onSubmit: (values) => {
+      console.log(values);
+    },
+    validationSchema: formSchema,
+  });
   //Redirect
   return (
     <section className="position-relative py-5 overflow-hidden vh-100 bg-warning">
@@ -25,21 +55,33 @@ const Register = () => {
                   type="text"
                   placeholder="First Name"
                 />
+                <div className="text-danger mb-2">
+                  {formik.touched.firstName && formik.errors.firstName}
+                </div>
                 <input
                   className="form-control mb-2"
                   type="TEXT"
                   placeholder="Last Name"
                 />
+                <div className="text-danger mb-2">
+                  {formik.touched.lastName && formik.errors.lastName}
+                </div>
                 <input
                   className="form-control mb-2"
                   type="email"
                   placeholder="Email"
                 />
+                <div className="text-danger mb-2">
+                  {formik.touched.email && formik.errors.email}
+                </div>
                 <input
                   className="form-control mb-2"
                   type="password"
                   placeholder="Password"
                 />
+                <div className="text-danger mb-2">
+                  {formik.touched.password && formik.errors.password}
+                </div>
                   <button
                     type="submit"
                     className="btn btn-primary py-2 w-100 mb-4"

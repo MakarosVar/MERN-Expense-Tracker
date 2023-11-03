@@ -1,5 +1,16 @@
 import React from "react";
 import { useFormik } from "formik";
+import * as Yup from "yup";
+
+//Yup validation
+const formSchema = Yup.object({
+  email: Yup.string()
+    .email("Invalid email format")
+    .required("Email is required"),
+  password: Yup.string()
+  .required("Password is required")
+  .length(8,"Password must be 8 characters"),
+});
 
 const Login = () => {
   //formik form
@@ -11,6 +22,7 @@ const Login = () => {
     onSubmit: (values) => {
       console.log(values);
     },
+    validationSchema: formSchema,
   });
   return (
     <section
@@ -42,6 +54,9 @@ const Login = () => {
                   type="email"
                   placeholder="Email-address"
                 />
+                <div className="text-danger mb-2">
+                  {formik.touched.email && formik.errors.email}
+                </div>
                 <input
                   value={formik.values.password}
                   onChange={formik.handleChange("password")}
@@ -50,6 +65,9 @@ const Login = () => {
                   type="password"
                   placeholder="Password"
                 />
+                <div className="text-danger mb-2">
+                  {formik.touched.password && formik.errors.password}
+                </div>
                 <div>
                   <button
                     type="submit"
