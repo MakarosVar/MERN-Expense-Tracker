@@ -7,6 +7,7 @@ import {
   errorHandler,
   notFound,
 } from './middleware/errorMiddleware.js';
+import cors from 'cors';
 
 const app = express();
 
@@ -15,9 +16,10 @@ DBconnection();
 
 //middlewares
 app.use(express.json());
+app.use(cors());
 
 //routes
-app.use('/api/users', usersRoute);
+app.use('/api/users',cors(), usersRoute);
 
 //income routes
 app.use('/api/income', incomeRoute);

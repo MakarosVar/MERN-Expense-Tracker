@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import Axios from "axios";
 
 //Login action
 
@@ -13,7 +13,7 @@ export const loginUserAction = createAsyncThunk(
     };
     try {
       //httpCall
-      const { data } = await axios.post(
+      const { data } = await Axios.post(
         "http://localhost:5000/api/users/login",
         payload,
         config
