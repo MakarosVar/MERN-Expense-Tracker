@@ -47,10 +47,13 @@ const Register = () => {
           </div>
           <div className="col-12 col-lg-5 ms-auto">
             <div className="p-5 bg-light rounded text-center">
-              <form>
+              <form onSubmit={formik.handleSubmit}>
                 <span className="text-muted">New User</span>
                 <h3 className="fw-bold mb-5">Register</h3>
                 <input
+                  value={formik.values.firstName}
+                  onChange={formik.handleChange("firstName")}
+                  onBlur={formik.handleBlur("firstName")}
                   className="form-control mb-2"
                   type="text"
                   placeholder="First Name"
@@ -59,6 +62,9 @@ const Register = () => {
                   {formik.touched.firstName && formik.errors.firstName}
                 </div>
                 <input
+                  value={formik.values.lastName}
+                  onChange={formik.handleChange("lastName")}
+                  onBlur={formik.handleBlur("lastName")}
                   className="form-control mb-2"
                   type="TEXT"
                   placeholder="Last Name"
@@ -67,6 +73,9 @@ const Register = () => {
                   {formik.touched.lastName && formik.errors.lastName}
                 </div>
                 <input
+                  value={formik.values.email}
+                  onChange={formik.handleChange("email")}
+                  onBlur={formik.handleBlur("email")}
                   className="form-control mb-2"
                   type="email"
                   placeholder="Email"
@@ -75,6 +84,9 @@ const Register = () => {
                   {formik.touched.email && formik.errors.email}
                 </div>
                 <input
+                  value={formik.values.password}
+                  onChange={formik.handleChange("password")}
+                  onBlur={formik.handleBlur("password")}                
                   className="form-control mb-2"
                   type="password"
                   placeholder="Password"
