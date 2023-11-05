@@ -8,7 +8,10 @@ const DBconnection = async () => {
     await mongoose.connect( process.env.MONGO_URI, {
       useUnifiedTopology: true,
       useNewUrlParser: true,
-      autoIndex: true,
+      autoIndex: true,  
+      writeConcern: {
+        w: 'majority'
+      }
     });
   } catch (error) {
     console.log(error);

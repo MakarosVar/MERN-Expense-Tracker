@@ -39,7 +39,7 @@ export const RegisterUserAction = createAsyncThunk(
     try {
       //httpCall
       const { data } = await Axios.post(
-        `${UserEndpoint}/register`,
+        `${UserEndpoint}/signup`,
         payload,
         config
       );

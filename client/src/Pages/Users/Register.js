@@ -1,6 +1,10 @@
 import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { useDispatch } from "react-redux";
+import { RegisterUserAction } from "../../Redux/slices/users/user.action";
+
+
 
 const Register = () => {
   //Yup validation
@@ -17,7 +21,11 @@ const Register = () => {
     password: Yup.string()
       .required("Password is required")
       .length(8, "Password must be 8 characters"),
-  });
+  });  
+  
+  //dispatch
+  const dispatch = useDispatch();
+  
   //formik form
   const formik = useFormik({
     initialValues: {
@@ -27,7 +35,7 @@ const Register = () => {
       password: "",
     },
     onSubmit: (values) => {
-      console.log(values);
+     dispatch(RegisterUserAction(values));
     },
     validationSchema: formSchema,
   });
