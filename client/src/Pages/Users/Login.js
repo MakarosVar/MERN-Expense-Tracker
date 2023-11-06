@@ -1,26 +1,29 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useDispatch,useSelector } from "react-redux";
-import {loginUserAction} from "../../Redux/slices/users/user.action";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUserAction } from "../../Redux/slices/users/user.action";
+import DisabledButton from "../../Components/DisabledButton";
 
 //Yup validation
 const formSchema = Yup.object({
   email: Yup.string()
     .email("Invalid email format")
     .required("Email is required"),
-  password: Yup.string()
-  .required("Password is required")
+  password: Yup.string().required("Password is required"),
   // .length(8,"Password must be 8 characters"),
 });
 
 const Login = () => {
+  //Redirect
+  const navigate = useNavigate();
   //dispatch
   const dispatch = useDispatch();
 
   //get user from store
-  const users = useSelector(state =>state?.users);
-  console.log(users);
+  const users = useSelector((state) => state?.users);
+  const { userAuth, userLoading, AppError, ServerError } = users;
   //formik form
   const formik = useFormik({
     initialValues: {
@@ -32,6 +35,11 @@ const Login = () => {
     },
     validationSchema: formSchema,
   });
+  //Redirect
+  useEffect(() => {
+    if (userAuth) return navigate("/profile");
+  }, [userAuth]);
+
   return (
     <section
       style={{ height: "100vh" }}
@@ -53,6 +61,11 @@ const Login = () => {
             <div className="p-5 bg-light rounded text-center">
               <span className="text-muted">Sign In</span>
               <h3 className="fw-bold mb-5">Login to your account</h3>
+              {AppError || ServerError ? (
+                <div className="alert-danger alert" role="alert">
+                  {AppError || ServerError}
+                </div>
+              ) : null}
               <form onSubmit={formik.handleSubmit}>
                 <input
                   value={formik.values.email}
@@ -77,12 +90,16 @@ const Login = () => {
                   {formik.touched.password && formik.errors.password}
                 </div>
                 <div>
-                  <button
-                    type="submit"
-                    className="btn btn-primary py-2 w-100 mb-4"
-                  >
-                    Login
-                  </button>
+                  {userLoading ? (
+                    <DisabledButton />
+                  ) : (
+                    <button
+                      type="submit"
+                      className="btn btn-primary py-2 w-100 mb-4"
+                    >
+                      Login
+                    </button>
+                  )}
                 </div>
               </form>
             </div>
