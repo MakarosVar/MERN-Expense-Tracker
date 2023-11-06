@@ -1,7 +1,7 @@
 import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import {loginUserAction} from "../../Redux/slices/users/user.action";
 
 //Yup validation
@@ -18,6 +18,9 @@ const Login = () => {
   //dispatch
   const dispatch = useDispatch();
 
+  //get user from store
+  const users = useSelector(state =>state?.users);
+  console.log(users);
   //formik form
   const formik = useFormik({
     initialValues: {
