@@ -38,7 +38,7 @@ const Login = () => {
   //Redirect
   useEffect(() => {
     if (userAuth) return navigate("/profile");
-  }, [userAuth]);
+  }, [userAuth, navigate]);
 
   return (
     <section
