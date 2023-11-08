@@ -3,13 +3,17 @@ import { RegisterUserAction, loginUserAction } from "./user.action";
 
 //slices
 
+//Get user from local storage
+const user = localStorage.getItem("user")
+  ? JSON.parse(localStorage.getItem("user"))
+  : null;
 const UserSlices = createSlice({
   name: "users",
   initialState: {
-    userAuth: null,
+    userAuth: user,
     userLoading: false,
-    AppError: null,
-    ServerError: null,
+    AppError: undefined,
+    ServerError: undefined,
   },
   extraReducers: (builder) => {
 

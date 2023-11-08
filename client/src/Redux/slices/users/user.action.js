@@ -19,6 +19,8 @@ export const loginUserAction = createAsyncThunk(
         payload,
         config
       );
+      //Save user in local storage
+      localStorage.setItem("user", JSON.stringify(data));
       return data;
     } catch (error) {
       if (!error?.response) {
