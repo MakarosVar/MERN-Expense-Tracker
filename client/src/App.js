@@ -9,19 +9,21 @@ import store from './Redux/store/store';
 import Profile from './Pages/Users/Profile';
 import AddExpense from './Pages/Expenses/AddExpense';
 import AddIncome from './Pages/Income/AddIncome';
-
+import NavBar from './Components/Navigation/Private/PrivateNavbar.js';
+import ProtectedRoute from './Components/Navigation/ProtectedRoute';
 
 function App() {
   return (
-    <Provider store={store}>
-    <Router>
+    <Provider store={store}>     
+    <Router> 
+      <NavBar/>
       <Routes>
         <Route exact path="/" Component={Home} />
         <Route exact path="/login" Component={Login} />
         <Route exact path="/register" Component={Register} />
-        <Route exact path="/profile" Component={Profile} />
-        <Route exact path="/add-expense" Component={AddExpense} />
-        <Route exact path="/add-income" Component={AddIncome} />
+        <Route path="/profile" element={<ProtectedRoute><Profile/></ProtectedRoute>} />
+        <Route path="/add-expense" element={<ProtectedRoute><AddExpense/></ProtectedRoute>} />
+        <Route path="/add-income"element={<ProtectedRoute><AddIncome/></ProtectedRoute>} />
       </Routes>
     </Router>
     </Provider>
