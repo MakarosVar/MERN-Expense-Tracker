@@ -9,7 +9,7 @@ import store from './Redux/store/store';
 import Profile from './Pages/Users/Profile';
 import AddExpense from './Pages/Expenses/AddExpense';
 import AddIncome from './Pages/Income/AddIncome';
-import NavBar from './Components/Navigation/Private/PrivateNavbar.js';
+import NavBar from './Components/Navigation/Navbar';
 import ProtectedRoute from './Components/Navigation/ProtectedRoute';
 
 function App() {
