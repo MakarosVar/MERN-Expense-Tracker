@@ -11,6 +11,7 @@ import AddExpense from './Pages/Expenses/AddExpense';
 import AddIncome from './Pages/Income/AddIncome';
 import NavBar from './Components/Navigation/Navbar';
 import ProtectedRoute from './Components/Navigation/ProtectedRoute';
+import NotAdmin from './Components/NotAdmin';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route exact path="/" Component={Home} />
         <Route exact path="/login" Component={Login} />
         <Route exact path="/register" Component={Register} />
+        <Route exact path="/not-found" Component={NotAdmin} />
         <Route path="/profile" element={<ProtectedRoute><Profile/></ProtectedRoute>} />
         <Route path="/add-expense" element={<ProtectedRoute><AddExpense/></ProtectedRoute>} />
         <Route path="/add-income"element={<ProtectedRoute><AddIncome/></ProtectedRoute>} />
