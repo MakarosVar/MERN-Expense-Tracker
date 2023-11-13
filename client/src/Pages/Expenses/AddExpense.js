@@ -1,7 +1,32 @@
 import React from "react";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 import moneySVG from "../../img/money.svg";
 
 const AddExpense = () => {
+  //yup validation
+  const formSchema = Yup.object({
+    title: Yup.string()
+      .required("Title is required"),
+    description: Yup.string()
+      .required("Description is required"),
+    amount: Yup.number().required("Amount is required"),
+  });
+
+//formik form
+const formik = useFormik({
+  initialValues: {
+    title: "",
+    description: "",
+    amount: "",
+  },
+  onSubmit: (values) => {
+    console.log(values);
+  },
+  validationSchema: formSchema,  
+});
+
+
   return (
     <>
       <section className="py-5 bg-danger vh-100">
