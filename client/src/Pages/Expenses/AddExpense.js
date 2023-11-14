@@ -6,26 +6,23 @@ import moneySVG from "../../img/money.svg";
 const AddExpense = () => {
   //yup validation
   const formSchema = Yup.object({
-    title: Yup.string()
-      .required("Title is required"),
-    description: Yup.string()
-      .required("Description is required"),
+    title: Yup.string().required("Title is required"),
+    description: Yup.string().required("Description is required"),
     amount: Yup.number().required("Amount is required"),
   });
 
-//formik form
-const formik = useFormik({
-  initialValues: {
-    title: "",
-    description: "",
-    amount: "",
-  },
-  onSubmit: (values) => {
-    console.log(values);
-  },
-  validationSchema: formSchema,  
-});
-
+  //formik form
+  const formik = useFormik({
+    initialValues: {
+      title: "",
+      description: "",
+      amount: "",
+    },
+    onSubmit: (values) => {
+      console.log(values);
+    },
+    validationSchema: formSchema,
+  });
 
   return (
     <>
@@ -47,24 +44,42 @@ const formik = useFormik({
                   <h2 className="mb-4 fw-light">Record New Expense</h2>
                   <div className="mb-3 input-group">
                     <input
+                      value={formik.values.title}
+                      onChange={formik.handleChange("title")}
+                      onBlur={formik.handleBlur("title")}
                       className="form-control"
                       type="text"
                       placeholder="Enter Title"
                     />
                   </div>
+                  <div className="text-danger mb-2">
+                    {formik.touched.title && formik.errors.title}
+                  </div>
                   <div className="mb-3 input-group">
                     <input
+                      value={formik.values.description}
+                      onChange={formik.handleChange("description")}
+                      onBlur={formik.handleBlur("description")}
                       className="form-control"
                       type="text"
                       placeholder="Enter Description"
                     />
                   </div>
+                  <div className="text-danger mb-2">
+                    {formik.touched.description && formik.errors.description}
+                  </div>
                   <div className="mb-3 input-group">
                     <input
+                      value={formik.values.a}
+                      onChange={formik.handleChange("amount")}
+                      onBlur={formik.handleBlur("amount")}
                       className="form-control"
                       type="number"
                       placeholder="Enter Amount"
                     />
+                  </div>
+                  <div className="text-danger mb-2">
+                    {formik.touched.amount && formik.errors.amount}
                   </div>
                   <button type="submit" className="btn btn-danger mb-4 w-100">
                     Record Expense
@@ -73,7 +88,7 @@ const formik = useFormik({
               </div>
             </div>
           </div>
-        </div> 
+        </div>
       </section>
     </>
   );
