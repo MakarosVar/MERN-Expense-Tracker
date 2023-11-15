@@ -1,4 +1,4 @@
 
 const UserEndpoint="http://localhost:5000/api/users";
-
-export default UserEndpoint;
+const ExpenseEndpoint="http://localhost:5000/api/expenses";
+export {UserEndpoint,ExpenseEndpoint};

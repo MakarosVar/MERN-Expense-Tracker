@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import UserEndpoint  from "../../../Utils/baseUrls";
+import {UserEndpoint}  from "../../../Utils/baseUrls";
 import Axios from "axios";
 
 //Login action

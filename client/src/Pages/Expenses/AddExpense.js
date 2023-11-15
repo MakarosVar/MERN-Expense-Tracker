@@ -39,7 +39,7 @@ const AddExpense = () => {
           <div className="row mb-4">
             <div className="col-12 col-md-8 col-lg-5 mx-auto">
               <div className="p-4 shadow-sm rounded bg-white">
-                <form>
+                <form onSubmit={formik.handleSubmit}>
                   <span className="text-muted">Expense</span>
                   <h2 className="mb-4 fw-light">Record New Expense</h2>
                   <div className="mb-3 input-group">
