@@ -7,9 +7,11 @@ import Axios from "axios";
 export const createExpenseAction = createAsyncThunk(
     "expense/create",
     async (payload, { rejectWithValue, getState, dispatch }) => {
+        const usersToken = getState().users?.userAuth?.token;
         const config = {
         headers: {
             "Content-Type": "application/json",
+            "Authorization": `Bearer ${usersToken}`,
         },
         };
         try {
