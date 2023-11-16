@@ -15,7 +15,7 @@ export const createExpenseAction = createAsyncThunk(
         try {
         //httpCall
         const { data } = await Axios.post(
-            `${ExpenseEndpoint}/expenses`,
+            `${ExpenseEndpoint}`,
             payload,
             config
         );

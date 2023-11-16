@@ -2,6 +2,8 @@ import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import moneySVG from "../../img/money.svg";
+import { useDispatch } from "react-redux";
+import { createExpenseAction }  from "../../Redux/slices/expenses/expenses.action";
 
 const AddExpense = () => {
   //yup validation
@@ -9,7 +11,9 @@ const AddExpense = () => {
     title: Yup.string().required("Title is required"),
     description: Yup.string().required("Description is required"),
     amount: Yup.number().required("Amount is required"),
-  });
+  }); 
+  //dispatch
+  const dispatch = useDispatch();
 
   //formik form
   const formik = useFormik({
@@ -19,6 +23,7 @@ const AddExpense = () => {
       amount: "",
     },
     onSubmit: (values) => {
+      dispatch(createExpenseAction(values));
       console.log(values);
     },
     validationSchema: formSchema,
