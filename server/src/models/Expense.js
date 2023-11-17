@@ -17,7 +17,7 @@ const expenseSchema = new mongoose.Schema(
     },
     type: {
       type: String,
-      default: "income",
+      default: "expense",
     },
     user: {
       type: mongoose.Schema.Types.ObjectId, //this is the id of the user
