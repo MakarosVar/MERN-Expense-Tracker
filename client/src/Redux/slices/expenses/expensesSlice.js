@@ -9,22 +9,23 @@ const expenseSlice = createSlice({
 
         //create expense
         builder.addCase(createExpenseAction.pending, (state, action) => {
-            state.userLoading = true;
-            state.AppError = undefined;
-            state.ServerError = undefined;
+            state.loading = true;
         });
 
         builder.addCase(createExpenseAction.fulfilled, (state, action) => {
-            state.userAuth = action?.payload;
-            state.userLoading = false;
-            state.AppError = undefined;
-            state.ServerError = undefined;
+            state.loading = false;
+            state.expenseCreated = action?.payload;
+            state.expAppError = undefined;
+            state.expServerError =  undefined;
         });
 
         builder.addCase(createExpenseAction.rejected, (state, action) => {
             state.userLoading = false;
-            state.AppError = action?.payload?.msg;
-            state.ServerError = action?.payload?.msg;
+            state.expAppError = action?.payload?.msg;
+            state.expServerError = action?.payload?.msg;
         });
     },
 });
+
+const expenseReducer = expenseSlice.reducer;
+export default expenseReducer;
