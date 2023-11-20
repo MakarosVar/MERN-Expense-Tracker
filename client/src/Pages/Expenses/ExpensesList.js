@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { getExpensesAction } from "../../Redux/slices/expenses/expenses.action";  
 
 const ExpensesList = () => {
   return (

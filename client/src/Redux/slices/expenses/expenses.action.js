@@ -31,3 +31,31 @@ export const createExpenseAction = createAsyncThunk(
     }
     );
 
+//get all expenses
+
+export const getAllExpensesAction = createAsyncThunk(
+    "expense/getAll",
+    async (payload, { rejectWithValue, getState, dispatch }) => {
+        const usersToken = getState().users?.userAuth?.token;
+        const config = {
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${usersToken}`,
+        },
+        };
+        try {
+        //httpCall
+        const { data } = await Axios.get(
+            `${ExpenseEndpoint}`,
+            config
+        );
+        return data;
+        } catch (error) {
+        if (!error?.response) {
+            throw error;
+        }
+        return rejectWithValue(error?.response?.data);
+        }
+    }
+    );
+
