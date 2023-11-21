@@ -1,9 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getExpensesAction } from "../../Redux/slices/expenses/expenses.action";  
+import { getAllExpensesAction } from "../../Redux/slices/expenses/expenses.action";
+import ContentDetails from "../../Components/ContentDetails";
 
 const ExpensesList = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAllExpensesAction(1));
+  }, [dispatch]);
+
+  const allExpenses = useSelector((state) => state?.expenses);
+  const { expensesList, loading, expAppError, expServerError } = allExpenses;
+  console.log(expensesList, loading, expAppError, expServerError);
+
   return (
     <>
       <section className="py-6">
@@ -57,7 +67,17 @@ const ExpensesList = () => {
                   </th>
                 </tr>
               </thead>
-              <tbody></tbody>
+              <tbody>
+                {loading ? (
+                  <h1>Loading</h1>
+                ) : expAppError || expServerError ? (
+                  <div>Err</div>
+                ) : expensesList?.docs.length <= 0 ? (
+                  <h1>No Expense Found</h1>
+                ) : (
+                  expensesList?.docs.map((expense) => <ContentDetails item={expense} key={expense?._id}/>)
+                )}
+              </tbody>
             </table>
           </div>
         </div>

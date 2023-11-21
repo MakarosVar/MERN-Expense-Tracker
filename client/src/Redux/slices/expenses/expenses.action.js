@@ -46,7 +46,7 @@ export const getAllExpensesAction = createAsyncThunk(
         try {
         //httpCall
         const { data } = await Axios.get(
-            `${ExpenseEndpoint}`,
+            `${ExpenseEndpoint}?page=${payload}`,
             config
         );
         return data;
