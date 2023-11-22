@@ -1,16 +1,16 @@
 import React from "react";
 
-const ContentDetails = ({ item}) => {
+const ContentDetails = ({item}) => {
   return (
     <>
       <tr className="align-middle text-dark">        
           <th className="p-6" scope="row">
-            {/* {item?.user?.firstname} {item?.user?.lastname} */}
+            {item?.user?.firstName} {item?.user?.lastName}
           </th>
-        {/* <td className="p-6">{item?.title}</td>
+        <td className="p-6">{item?.title}</td>
         <td className="p-6">{item?.description}</td>
         <td className="p-6">{item?.amount}</td>
-        <td className="p-6">{useDateFormatter(item?.createdAt)}</td> */}
+        <td className="p-6">{item?.createdAt}</td>
         <td className="p-6">
           <button
             // onClick={() => navigate(history, "edit", item)}
