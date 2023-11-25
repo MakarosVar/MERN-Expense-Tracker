@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from "formik";
 import { useNavigate, useLocation } from "react-router-dom";
 import * as Yup from "yup";
-import moneySVG from "../img/money.svg";
-import DisabledButton from "./DisabledButton";
+import moneySVG from "../../img/money.svg";
+import { updateExpenseAction } from "../../Redux/slices/expenses/expenses.action";
+import { useDispatch } from "react-redux";
 
 //Form validation
 const formSchema = Yup.object({
@@ -12,14 +12,13 @@ const formSchema = Yup.object({
   description: Yup.string().required("Description is required"),
   amount: Yup.number().required("Amount is required"),
 });
-const EditContent =() => {
-  const location=useLocation();
-  console.log(location.state);
+const EditExpense = () => {
+  const location = useLocation();
   const { item } = location.state;
   //dispatch action
   //history
-  const navigate=useNavigate();
 
+  const dispatch = useDispatch();
 
   //income  //initialize form
   const formik = useFormik({
@@ -28,8 +27,10 @@ const EditContent =() => {
       description: item?.description,
       amount: item?.amount,
     },
-    onSubmit: values => {
-      console.log(values);    },
+    onSubmit: (values) => {
+      const data = { ...values, id: item?._id };
+      dispatch(updateExpenseAction(data));
+    },
     validationSchema: formSchema,
   });
 
@@ -90,10 +91,10 @@ const EditContent =() => {
                 {/* Err */}
                 <div className="text-danger mb-2">
                   {formik.touched.amount && formik.errors.amount}
-                </div>              
-                  <button type="submit" className="btn btn-primary mb-4 w-100">
-                    Add
-                  </button>
+                </div>
+                <button type="submit" className="btn btn-primary mb-4 w-100">
+                  Add
+                </button>
               </form>
             </div>
           </div>
@@ -103,4 +104,4 @@ const EditContent =() => {
   );
 };
 
-export default EditContent;
+export default EditExpense;

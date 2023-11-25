@@ -12,7 +12,6 @@ const authMiddleware = expressAsyncHandler(async (req, res, next) => {
         const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
         console.log(decodedToken);
         req.user = await User.findById(decodedToken.id);
-        console.log(req.user);
         next();
       }
     } catch {

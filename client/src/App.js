@@ -13,7 +13,7 @@ import NavBar from './Components/Navigation/Navbar';
 import ProtectedRoute from './Components/Navigation/ProtectedRoute';
 import NotAdmin from './Components/NotAdmin';
 import ExpensesList from './Pages/Expenses/ExpensesList';
-import EditContent from './Components/EditContent';
+import EditExpense from './Pages/Expenses/EditExpense';
 
 function App() {
   return (
@@ -28,7 +28,7 @@ function App() {
         <Route path="/profile" element={<ProtectedRoute><Profile/></ProtectedRoute>} />
         <Route path="/add-expense" element={<ProtectedRoute><AddExpense/></ProtectedRoute>} />
         <Route path="/expenses" element={<ProtectedRoute><ExpensesList/></ProtectedRoute>} />
-        <Route path="/edit-expense" element={<ProtectedRoute><EditContent/></ProtectedRoute>} />
+        <Route path="/edit-expense" element={<ProtectedRoute><EditExpense/></ProtectedRoute>} />
         <Route path="/add-income"element={<ProtectedRoute><AddIncome/></ProtectedRoute>} />
       </Routes>
     </Router>
