@@ -4,7 +4,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 import * as Yup from "yup";
 import moneySVG from "../../img/money.svg";
 import { updateExpenseAction } from "../../Redux/slices/expenses/expenses.action";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import DisabledButton from "../../Components/DisabledButton";
 
 //Form validation
 const formSchema = Yup.object({
@@ -19,7 +20,8 @@ const EditExpense = () => {
   //history
 
   const dispatch = useDispatch();
-
+  const expenses = useSelector((state) => state?.expenses);
+  const { expensesList, loading, expAppError, expServerError } = expenses;
   //income  //initialize form
   const formik = useFormik({
     initialValues: {
@@ -92,9 +94,13 @@ const EditExpense = () => {
                 <div className="text-danger mb-2">
                   {formik.touched.amount && formik.errors.amount}
                 </div>
-                <button type="submit" className="btn btn-primary mb-4 w-100">
-                  Add
+                {
+                    loading ? <DisabledButton/> : 
+                    <button type="submit" className="btn btn-primary mb-4 w-100">
+                  Update
                 </button>
+
+                }
               </form>
             </div>
           </div>
