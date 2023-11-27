@@ -9,8 +9,8 @@ const ExpensesList = () => {
   const dispatch = useDispatch();
   const [page,setPage] = useState(1);
   useEffect(() => {
-    dispatch(getAllExpensesAction(page));
-  }, [dispatch,page]);
+    dispatch(getAllExpensesAction(+page));
+  }, [dispatch,page,setPage]);
 
   const allExpenses = useSelector((state) => state?.expenses);
   const { expensesList, loading, expAppError, expServerError } = allExpenses;
