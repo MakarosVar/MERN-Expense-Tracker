@@ -3,17 +3,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getAllExpensesAction } from "../../Redux/slices/expenses/expenses.action";
 import ContentDetails from "../../Components/ContentDetails";
+import AppPagination from "../../Components/AppPagination";
 
 const ExpensesList = () => {
   const dispatch = useDispatch();
+  const [page,setPage] = useState(1);
   useEffect(() => {
-    dispatch(getAllExpensesAction(1));
-  }, [dispatch]);
+    dispatch(getAllExpensesAction(page));
+  }, [dispatch,page]);
 
   const allExpenses = useSelector((state) => state?.expenses);
   const { expensesList, loading, expAppError, expServerError } = allExpenses;
   console.log(expensesList, loading, expAppError, expServerError);
-
   return (
     <>
       <section className="py-6">
@@ -75,11 +76,28 @@ const ExpensesList = () => {
                 ) : expensesList?.docs.length <= 0 ? (
                   <h1>No Expense Found</h1>
                 ) : (
-                  expensesList?.docs.map((expense) => <ContentDetails item={expense} key={expense?._id}/>)
+                  expensesList?.docs.map((expense) => (
+                    <ContentDetails item={expense} key={expense?._id} />
+                  ))
                 )}
               </tbody>
             </table>
           </div>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            marginTop: "20px",
+          }}
+        >
+          <AppPagination          
+            setPage={setPage}
+            page={expensesList?.page}
+            items={expensesList?.totalPages}
+            getAll={getAllExpensesAction}
+          />
         </div>
       </section>
     </>
